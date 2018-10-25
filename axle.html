@@ -20,6 +20,68 @@
     <!-- This is our Meta Description -->
     <meta name="description" content="Axle | Autonomous tractor | Mikkel Astrom">
 
+    <script>
+    function magnify(imgID, zoom) {
+      var img, glass, w, h, bw;
+      img = document.getElementById(imgID);
+
+      /*create magnifier glass:*/
+      glass = document.createElement("DIV");
+      glass.setAttribute("class", "img-magnifier-glass");
+
+      /*insert magnifier glass:*/
+      img.parentElement.insertBefore(glass, img);
+
+      /*set background properties for the magnifier glass:*/
+      glass.style.backgroundImage = "url('" + img.src + "')";
+      glass.style.backgroundRepeat = "no-repeat";
+      glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+      bw = 3;
+      w = glass.offsetWidth / 2;
+      h = glass.offsetHeight / 2;
+
+      /*execute a function when someone moves the magnifier glass over the image:*/
+      glass.addEventListener("mousemove", moveMagnifier);
+      img.addEventListener("mousemove", moveMagnifier);
+
+      /*and also for touch screens:*/
+      glass.addEventListener("touchmove", moveMagnifier);
+      img.addEventListener("touchmove", moveMagnifier);
+      function moveMagnifier(e) {
+        var pos, x, y;
+        /*prevent any other actions that may occur when moving over the image*/
+        e.preventDefault();
+        /*get the cursor's x and y positions:*/
+        pos = getCursorPos(e);
+        x = pos.x;
+        y = pos.y;
+        /*prevent the magnifier glass from being positioned outside the image:*/
+        if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
+        if (x < w / zoom) {x = w / zoom;}
+        if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
+        if (y < h / zoom) {y = h / zoom;}
+        /*set the position of the magnifier glass:*/
+        glass.style.left = (x - w) + "px";
+        glass.style.top = (y - h) + "px";
+        /*display what the magnifier glass "sees":*/
+        glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+      }
+
+      function getCursorPos(e) {
+        var a, x = 0, y = 0;
+        e = e || window.event;
+        /*get the x and y positions of the image:*/
+        a = img.getBoundingClientRect();
+        /*calculate the cursor's x and y coordinates, relative to the image:*/
+        x = e.pageX - a.left;
+        y = e.pageY - a.top;
+        /*consider any page scrolling:*/
+        x = x - window.pageXOffset;
+        y = y - window.pageYOffset;
+        return {x : x, y : y};
+      }
+    }
+</script>
   </head>
   <body>
 
@@ -28,7 +90,7 @@
       <!-- This is where our Navbar lives -->
       <nav class="navbar fixed-top navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand" href="#"><img src="./img/common/skull.svg" width="30" height="30" class="d-inline-block align-top nav-bar-img" alt=""> Mikkel Astrom</a>   x
+          <a class="navbar-brand" href="#"><img src="./img/common/skull.svg" width="30" height="30" class="d-inline-block align-top nav-bar-img" alt=""> Mikkel Astrom</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -50,11 +112,11 @@
 
       <div class="container bg-transparent">
         <div class="row align-items-center h-100">
-          <div class="col-md-10">
+          <div class="col-md-12">
             <img src="./img/companion/header.png" class="img-fluid" alt="image">
 
 
-              <h1 class="welcome-special">Axle</h1>
+              <h1 class="axle">Axle</h1>
 
               <div class="col-md-6">
                 <p><center>Autonomous Farming Autonomous Farmi
@@ -62,13 +124,29 @@
                   Farming Autonomous Farming Autonomous Farming </p></center>
                 </div>
 
-              <img src="./img/companion/prototype.gif" class="img-fluid" alt="image">
+              <img src="./img/companion/prototype.gif" class="axle-p" alt="image">
 
-                <div class="col-md-6">
-              <p><center>Autonomous FarmingAutonomous Farming Autonomous Farming Autonomous Farming Autonomous Farming Autonomous Farming Autonomous Farming </p></center>
+
+              <div class="col-md-12">
+              <a href="./img/Companion/download.png" download>
+                <img src="./img/Companion/download.png" style="width:5%;height:5%;" class="img-fluid" alt="image">
+                <span class="img-caption"><center>Click to download prototype (Mac only)</center></span></a>
+
               </div>
 
-              <img src="./img/companion/flow.png" class="img-fluid" alt="image">
+              <div class="col-md-6">
+            <p><center>Autonomous FarmingAutonomous Farming Autonomous Farming Autonomous Farming Autonomous Farming Autonomous Farming Autonomous Farming </p></center>
+            </div>
+
+
+              <div class="img-magnifier-container" class="col-md-12" align="center">
+                <img id="myimage" src="./img/companion/flow.png" class="userflow" alt="user flow">
+                </div>
+
+
+              <script>
+          magnify("myimage", 3);
+            </script>
 
           </div>
         </div>

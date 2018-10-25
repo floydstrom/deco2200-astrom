@@ -65,13 +65,18 @@ img{
 
 /*Font Override Rules*/
 h1, h2, h3, h4, h5, h6 {
-	font-family:'Montserrat', Sans-Serif;
+	font-family:'helvetica', Sans-Serif;
 	margin-bottom: 20px;
 }
 	h1.welcome-special{
 		font-size: 90px;
 	}
 
+	h1.axle{
+		font-size: 70px;
+		margin-top: 100px;
+		margin-bottom: 60px;
+	}
 	h2.welcome-special-sub{
 		font-family: 'Lato', Sans-Serif;
 		font-size: 30px;
@@ -84,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 p, li, span, a {
-	font-family: 'Lato', Sans-Serif;
+	font-family: 'helvetica', Sans-Serif;
 	text-align: justify;
 	font-weight: 300;
 }
@@ -155,4 +160,35 @@ background-color: #000;
 
 .carousel-indicatorsactive{
 background-color: #999;
+}
+
+* {box-sizing: border-box;}
+
+.img-magnifier-container {
+  position:relative;
+}
+
+.img-magnifier-glass {
+  position: absolute;
+  border: 2px solid #000;
+  border-radius: 50%;
+  cursor: none;
+  /*Set the size of the magnifier glass:*/
+  width: 170px;
+  height: 170px;
+}
+
+.axle-p {
+
+margin-bottom: 50px;
+margin-top: 50px;
+
+}
+
+.userflow {
+
+margin-bottom: 150px;
+margin-top: 70px;
+
+
 }
